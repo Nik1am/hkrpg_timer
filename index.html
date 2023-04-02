@@ -1,5 +1,5 @@
 <script>
-release_date = 1682474400000
+release_date = new Date().getTime()+10*1000//1682474400000
 window.onload = () => {
     timer = document.getElementById("timer")
     setInterval(update,1000,timer)
@@ -19,7 +19,13 @@ function u2t(unix) {
     return `${days}:${hours}:${minutes}:${seconds}`
 }
 function update(timer){
-    timer.innerText = u2t(release_date-new Date())
+    time = release_date-new Date()
+    if(time>=0){
+        timer.innerText = u2t(time)
+    }
+    else{
+        timer.innerText = "🎉0:0:0:0🎉"
+    }
 }
 </script>
 <style>
