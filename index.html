@@ -3,6 +3,23 @@ release_date = 1682474400000
 window.onload = () => {
     timer = document.getElementById("timer")
     setInterval(update,1000,timer)
+
+    images = document.getElementById('images')
+    for(i = 0; i<28;i++){
+        e = document.createElement('img')
+        e.src = `./chars/char_${i}.png`
+        images.append(e)
+    }
+    images.children[0].style.opacity = 0.5
+    imgid = 0
+    function next(){
+        normalized = imgid % 28
+        normalizednext = (imgid+1) % 28
+        images.children[normalized].style.opacity = 0
+        images.children[normalizednext].style.opacity = 0.5
+        imgid++
+    }
+    setInterval(next,10000)
 }
 function add_leading_zero(i){
     if(i>9){
@@ -31,7 +48,7 @@ function update(timer){
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Chivo+Mono&display=swap');
 body{
-    background:url("https://act.hoyoverse.com/sr/event/e20220601exhibition_sea-8ebv/images/BG@2x.26bf7b53.png");
+    background:url("BG@2x.26bf7b53.png");
     margin:0;
     padding: 0;
     overflow:hidden;
@@ -46,10 +63,12 @@ body{
     font-family: 'Chivo Mono';
     text-shadow: 0px 0px 12px #000000,0px 0px 12px #000000;
 }
-#character{
+img {
+    opacity: 0;
+    position: absolute;
+    transition-duration: 1s;
     height: 100vh;
-    opacity: 50%;
 }
 </style>
-<img id="character" src="https://act.hoyoverse.com/sr/event/e20230115draw-wtn7k1/images/char-1.fc1e5fad..png">
+<div id="images"></div>
 <div id="timer">...</div>
